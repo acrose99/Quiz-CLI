@@ -1,22 +1,20 @@
+import SpecificAnswerQuiz
+import multipleChoiceQuestionsOneAnswer
+import trueOrFalseQuestion
+
 
 def main():
-    with open("Quiz Questions.txt") as file_in:
-        questions = []
-        for line in file_in:
-            questions.append(line)
+    print("Which quiz do you want to answer/look at")
+    quiz_type = input("Type T/F, Multiple Choice, or Specific Answers: ")
 
-    answers = []
-    for i in range(len(questions)):
-        print(questions[i])
-        answer = input("Answer: ")
-        answers.append(answer)
-
-    with open('Quiz Answers.txt', 'w') as file_out:
-        a = 0
-        for i in answers:
-            a = a + 1
-            file_out.write('{}) {}\n\n'.format(a, i))
-
+    if quiz_type == 'T/F':
+        trueOrFalseQuestion.main()
+    elif quiz_type == 'Multiple Choice':
+        multipleChoiceQuestionsOneAnswer.main()
+    elif quiz_type == 'Specific Answers':
+        SpecificAnswerQuiz.main()
+    else:
+        print('Error')
 
 
 main()
