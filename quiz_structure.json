@@ -60,12 +60,12 @@
       },
       {
         "question": "12",
-        "info": "True or false, Stebe Jobs invented Apple",
+        "info": "True or false, Steve Jobs invented Apple",
         "Answer": "True"
       },
       {
         "question": "13",
-        "info": "Barack Obama was the 3rd president",
+        "info": "Barrack Obama was the 3rd president",
         "Answer": "False"
       },
       {
@@ -75,7 +75,7 @@
       },
       {
         "question": "15",
-        "info": "Linux Torvalds is the maintainer of Linux",
+        "info": "Linus Torvalds is the maintainer of Linux",
         "Answer": "True"
       }
     ],
@@ -110,7 +110,7 @@
           "2007",
           "2008",
           "2009",
-          "20010"
+          "2010"
         ]
       },
       {
@@ -133,7 +133,7 @@
           "Gamethyon",
           "Teascript "
         ],
-        "Answer": "M"
+        "Answer": "LISP"
       }
     ]
   }
