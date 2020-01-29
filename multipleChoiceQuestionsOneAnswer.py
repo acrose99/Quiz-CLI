@@ -1,8 +1,8 @@
 import json
 
 
-def main():
-    with open("quiz_structure.json", 'r') as file_in:
+def answer(filename):
+    with open(filename, 'r') as file_in:
         questions = []
         questioncount = 0
         data = json.load(file_in)
@@ -38,3 +38,33 @@ def main():
             if useranswers[answer] == upperanswers[answer]:
                 correct_count = correct_count + 1
         print("Your score on Multiple Choice: {}/{}".format(correct_count, questioncount))
+
+
+def create():
+    question_count = int(input("How many questions do you want to create?"))
+    questions = []
+    counter = 0
+    while counter < question_count:
+        info = input("What is question " + str(counter + 1) + "?")
+        number_of_options = int(input("How many options are there?"))
+        options = []
+        for x in range(number_of_options):
+            option = input("What is option " + str(x + 1) + "?")
+            options.append(option)
+        answer = input("What is the answer")
+        if answer not in options:
+            print("Answer not in options, ERROR")
+
+        question_dict = {
+            "question":
+                {
+                    "questionCount": counter + 1,
+                    "info": info,
+                    "options": options,
+                    "Answer": answer
+                }
+        }
+        questions.append(question_dict)
+        counter = counter + 1
+    with open('Quiz_multiple_choice_questions_quiz.json', 'w') as file_out:
+        json.dump(questions, file_out, indent=4, sort_keys=True)

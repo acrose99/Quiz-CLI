@@ -1,8 +1,8 @@
 import json
 
 
-def main():
-    with open("quiz_structure.json", 'r') as file_in:
+def answer(filename):
+    with open(filename, 'r') as file_in:
         questions = []
         questioncount = 0
         data = json.load(file_in)
@@ -37,3 +37,24 @@ def main():
             if useranswers[answer] == upperanswers[answer]:
                 correct_count = correct_count + 1
         print("Your score on True/False: {}/{}".format(correct_count, questioncount))
+
+
+def create():
+    question_count = int(input("How many questions do you want to create?"))
+    questions = []
+    counter = 0
+    while counter < question_count:
+        info = input("What is question " + str(counter + 1) + "?")
+        answer = input("True or False?")
+        question_dict = {
+            "question":
+                {
+                    "questionCount": counter + 1,
+                    "info": info,
+                    "Answer": answer
+                }
+        }
+        questions.append(question_dict)
+        counter = counter + 1
+    with open('Quiz_True_or_False_Quiz.json', 'w') as file_out:
+        json.dump(questions, file_out, indent=4, sort_keys=True)

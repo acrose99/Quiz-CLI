@@ -1,8 +1,8 @@
 import json
 
 
-def main():
-    with open("quiz_structure.json", 'r') as file_in:
+def answer(filename):
+    with open(filename, 'r') as file_in:
         questions = []
         questioncount = 0
         data = json.load(file_in)
@@ -18,11 +18,11 @@ def main():
         useranswers = []
         for question in specific_answer_questions:
             jsonanswers.append(question['Answer'])
-        #print(jsonanswers)
+        # print(jsonanswers)
         upperanswers = []
         for answer in jsonanswers:
             upperanswers.append(answer.upper())
-        #print(upperanswers)
+        # print(upperanswers)
         for i in range(len(questions)):
             print(questions[i])
             answer = input("Answer: ")
@@ -37,3 +37,24 @@ def main():
             if useranswers[answer] == upperanswers[answer]:
                 correct_count = correct_count + 1
         print("Your score on Specific Answers: {}/{}".format(correct_count, questioncount))
+
+
+def create():
+    question_count = int(input("How many questions do you want to create?"))
+    questions = []
+    counter = 0
+    while counter < question_count:
+        info = input("What is question " + str(counter + 1) + "?")
+        answer = input("What is the answer")
+        question_dict = {
+            "question":
+                {
+                    "questionCount": counter + 1,
+                    "info": info,
+                    "Answer": answer
+                }
+        }
+        questions.append(question_dict)
+        counter = counter + 1
+    with open('Quiz_Specific_Questions_Quiz.json', 'w') as file_out:
+        json.dump(questions, file_out, indent=4, sort_keys=True)
