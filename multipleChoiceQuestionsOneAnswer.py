@@ -28,16 +28,26 @@ def answer(filename):
             print('Options: ' + str(multiple_choice_questions[i]['options']))
             answer = input("Answer: ")
             useranswers.append(answer.upper())
-        with open('Quiz_multiple_choice_questions.txt', 'w') as file_out:
-            a = 0
-            for i in useranswers:
-                a = a + 1
-                file_out.write('{}) {}\n\n'.format(a, i))
         correct_count = 0
+        tot_answer_count = 0
+        answer_output = []
+        while tot_answer_count < questioncount:
+            if useranswers[tot_answer_count] == upperanswers[tot_answer_count]:
+                correct_count = correct_count + 1
+            user_answer_dict = {
+                "User Answers": {
+                    "Answer": useranswers[tot_answer_count]
+                }
+            }
+            answer_output.append(user_answer_dict)
+            tot_answer_count = tot_answer_count + 1
         for answer in range(questioncount):
             if useranswers[answer] == upperanswers[answer]:
                 correct_count = correct_count + 1
         print("Your score on Multiple Choice: {}/{}".format(correct_count, questioncount))
+        with open('Quiz_multiple_choice_questions_quiz_User_Answers.json', 'w') as file_out:
+            json.dump(answer_output, file_out, indent=4, sort_keys=True)
+
 
 
 def create():
