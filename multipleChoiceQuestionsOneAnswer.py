@@ -4,28 +4,23 @@ import json
 def answer(filename):
     with open(filename, 'r') as file_in:
         questions = []
+        correct_or_incorrect = []
         questioncount = 0
         data = json.load(file_in)
-        multiple_choice_questions = data['questions']['multipleChoiceQuestionsOneAnswer']
-        # print(multiple_choice_questions)
-        # print(multiple_choice_questions[0])
-        # print(multiple_choice_questions[0]['info'])
-        for question in multiple_choice_questions:
+        multiple_choice_answer_questions = data['questions']['multipleChoiceQuestionsOneAnswer']
+        for question in multiple_choice_answer_questions:
             questions.append(question['info'])
             questioncount = questioncount + 1
-        # print(questions)
         jsonanswers = []
         useranswers = []
-        for question in multiple_choice_questions:
+        for question in multiple_choice_answer_questions:
             jsonanswers.append(question['Answer'])
-        # print(jsonanswers)
         upperanswers = []
         for answer in jsonanswers:
             upperanswers.append(answer.upper())
-        # print(upperanswers)
         for i in range(len(questions)):
             print(questions[i])
-            print('Options: ' + str(multiple_choice_questions[i]['options']))
+            print('Options: ' + str(multiple_choice_answer_questions[i]['options']))
             answer = input("Answer: ")
             useranswers.append(answer.upper())
         correct_count = 0
@@ -34,21 +29,21 @@ def answer(filename):
         while tot_answer_count < questioncount:
             if useranswers[tot_answer_count] == upperanswers[tot_answer_count]:
                 correct_count = correct_count + 1
+                correct_or_incorrect.append("Correct")
+            else:
+                correct_or_incorrect.append("Incorrect")
             user_answer_dict = {
-                "User Answers": {
-                    "Answer": useranswers[tot_answer_count]
+                "User Answer: " + str(tot_answer_count + 1): {
+                    "Question": questions[tot_answer_count],
+                    "Answer": useranswers[tot_answer_count],
+                    "Correct_or_not:": correct_or_incorrect[tot_answer_count]
                 }
             }
             answer_output.append(user_answer_dict)
             tot_answer_count = tot_answer_count + 1
-        for answer in range(questioncount):
-            if useranswers[answer] == upperanswers[answer]:
-                correct_count = correct_count + 1
-        print("Your score on Multiple Choice: {}/{}".format(correct_count, questioncount))
-        with open('Quiz_multiple_choice_questions_quiz_User_Answers.json', 'w') as file_out:
+        print("Your score on Multiple Choice questions: {}/{}".format(correct_count, questioncount))
+        with open('Quiz_Multiple_Choice_Questions_Quiz_User_Answers.json', 'w') as file_out:
             json.dump(answer_output, file_out, indent=4, sort_keys=True)
-
-
 
 def create():
     question_count = int(input("How many questions do you want to create?"))

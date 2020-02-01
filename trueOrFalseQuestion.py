@@ -4,6 +4,7 @@ import json
 def answer(filename):
     with open(filename, 'r') as file_in:
         questions = []
+        correct_or_incorrect = []
         questioncount = 0
         data = json.load(file_in)
         True_False_Questions = data['questions']['trueOrFalseQuestions']
@@ -27,9 +28,14 @@ def answer(filename):
         while tot_answer_count < questioncount:
             if useranswers[tot_answer_count] == upperanswers[tot_answer_count]:
                 correct_count = correct_count + 1
+                correct_or_incorrect.append("Correct")
+            else:
+                correct_or_incorrect.append("Incorrect")
             user_answer_dict = {
-                "User Answers": {
-                    "Answer": useranswers[tot_answer_count]
+                "User Answer: " + str(tot_answer_count + 1): {
+                    "Question": questions[tot_answer_count],
+                    "Answer": useranswers[tot_answer_count],
+                    "Correct_or_not:": correct_or_incorrect[tot_answer_count]
                 }
             }
             answer_output.append(user_answer_dict)

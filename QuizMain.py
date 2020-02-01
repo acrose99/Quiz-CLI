@@ -4,6 +4,8 @@ import trueOrFalseQuestion
 # import CombinationQuiz
 import json
 
+import trueOrFalseQuestionCSV
+
 
 def main():
     print("Would you like to create a quiz, or answer quizzes that have been made?")
@@ -12,7 +14,11 @@ def main():
         print("Which quiz do you want to answer/look at")
         quiz_type = input("Type T/F, Multiple Choice, or Specific Answers, or all:")
         if quiz_type == 'T/F' or quiz_type == 't/f':
-            trueOrFalseQuestion.answer('quiz_structure.json')
+            csv_or_json = input("JSON or CSV")
+            if csv_or_json == "JSON":
+                trueOrFalseQuestion.answer('quiz_structure.json')
+            else:
+                trueOrFalseQuestionCSV.answer('quiz_structure.json')
         elif quiz_type == 'Multiple Choice' or quiz_type == 'multiple choice':
             multipleChoiceQuestionsOneAnswer.answer('quiz_structure.json')
         elif quiz_type == 'Specific Answers' or quiz_type == 'specific answers':
@@ -30,12 +36,13 @@ def main():
             SpecificAnswerQuiz.create()
         elif quiz_format == "multiple choice" or quiz_format == "Multiple choice" or quiz_format == "Multiple Choice":
             multipleChoiceQuestionsOneAnswer.create()
-        if quiz_format == "T/F" or quiz_format == "True/False" or quiz_format == "t/f":
+        elif quiz_format == "T/F" or quiz_format == "True/False" or quiz_format == "t/f":
             trueOrFalseQuestion.create()
-        if quiz_format == "combination" or quiz_format == "Combination":
+        elif quiz_format == "combination" or quiz_format == "Combination":
             # CombinationQuiz.answer()
             print("Feature currently not implemented yet. Stay tuned for future updates.")
     else:
         print("Error")
+
 
 main()
