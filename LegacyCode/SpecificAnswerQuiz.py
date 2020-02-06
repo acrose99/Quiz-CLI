@@ -1,4 +1,5 @@
 import json
+import csv
 
 
 def answer(filename):
@@ -7,20 +8,19 @@ def answer(filename):
         correct_or_incorrect = []
         questioncount = 0
         data = json.load(file_in)
-        multiple_choice_answer_questions = data['questions']['multipleChoiceQuestionsOneAnswer']
-        for question in multiple_choice_answer_questions:
+        specific_answer_questions = data['questions']
+        for question in specific_answer_questions:
             questions.append(question['info'])
             questioncount = questioncount + 1
         jsonanswers = []
         useranswers = []
-        for question in multiple_choice_answer_questions:
+        for question in specific_answer_questions:
             jsonanswers.append(question['Answer'])
         upperanswers = []
         for answer in jsonanswers:
             upperanswers.append(answer.upper())
         for i in range(len(questions)):
             print(questions[i])
-            print('Options: ' + str(multiple_choice_answer_questions[i]['options']))
             answer = input("Answer: ")
             useranswers.append(answer.upper())
         correct_count = 0
@@ -41,35 +41,31 @@ def answer(filename):
             }
             answer_output.append(user_answer_dict)
             tot_answer_count = tot_answer_count + 1
-        print("Your score on Multiple Choice questions: {}/{}".format(correct_count, questioncount))
-        with open('Quiz_Multiple_Choice_Questions_Quiz_User_Answers.json', 'w') as file_out:
+        print("Your score on Specific Answer questions: {}/{}".format(correct_count, questioncount))
+        with open('Quiz_Specific_Questions_Quiz_User_Answers.json', 'w') as file_out:
             json.dump(answer_output, file_out, indent=4, sort_keys=True)
 
+
 def create():
+    question_dict_wrapper = {
+        'questions': [
+
+        ]
+    }
     question_count = int(input("How many questions do you want to create?"))
     questions = []
     counter = 0
     while counter < question_count:
         info = input("What is question " + str(counter + 1) + "?")
-        number_of_options = int(input("How many options are there?"))
-        options = []
-        for x in range(number_of_options):
-            option = input("What is option " + str(x + 1) + "?")
-            options.append(option)
         answer = input("What is the answer")
-        if answer not in options:
-            print("Answer not in options, ERROR")
-
         question_dict = {
-            "question":
-                {
-                    "questionCount": counter + 1,
-                    "info": info,
-                    "options": options,
-                    "Answer": answer
-                }
+            "questionCount": counter + 1,
+            "info": info,
+            "Answer": answer
         }
-        questions.append(question_dict)
         counter = counter + 1
-    with open('Quiz_multiple_choice_questions_quiz.json', 'w') as file_out:
-        json.dump(questions, file_out, indent=4, sort_keys=True)
+        question_dict_wrapper['questions'].append(question_dict)
+        questions.append(question_dict_wrapper)
+    file_output = input("What would you like to name your quiz?")
+    with open(file_output + '.json', 'w') as file_out:
+        json.dump(question_dict_wrapper, file_out, indent=4, sort_keys=True)

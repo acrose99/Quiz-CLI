@@ -1,25 +1,29 @@
 import json
 
 
-def answer(filename):
+def main(filename):
     with open(filename, 'r') as file_in:
         questions = []
         correct_or_incorrect = []
         questioncount = 0
         data = json.load(file_in)
-        True_False_Questions = data['questions']['trueOrFalseQuestions']
-        for question in True_False_Questions:
+        questions_json = data['questions']
+        for question in questions_json:
             questions.append(question['info'])
             questioncount = questioncount + 1
         jsonanswers = []
         useranswers = []
-        for question in True_False_Questions:
+        for question in questions_json:
             jsonanswers.append(question['Answer'])
         upperanswers = []
         for answer in jsonanswers:
             upperanswers.append(answer.upper())
         for i in range(len(questions)):
             print(questions[i])
+            if 'options' in questions_json[i]:
+                print('Options: ' + str(questions_json[i]['options']))
+            elif questions_json[i]['Answer'] == "True" or questions_json[i]['Answer'] == "False":
+                print("True or False?")
             answer = input("Answer: ")
             useranswers.append(answer.upper())
         correct_count = 0
@@ -40,27 +44,41 @@ def answer(filename):
             }
             answer_output.append(user_answer_dict)
             tot_answer_count = tot_answer_count + 1
-        print("Your score on True/False: {}/{}".format(correct_count, questioncount))
-        with open('Quiz_True_or_False_Quiz_User_Answers.json', 'w') as file_out:
+        print("Your score on Multiple Choice questions: {}/{}".format(correct_count, questioncount))
+        with open('Quiz_Multiple_Choice_Questions_Quiz_User_Answers.json', 'w') as file_out:
             json.dump(answer_output, file_out, indent=4, sort_keys=True)
 
 
 def create():
+    question_dict_wrapper = {
+        'questions': [
+
+        ]
+    }
     question_count = int(input("How many questions do you want to create?"))
     questions = []
     counter = 0
     while counter < question_count:
         info = input("What is question " + str(counter + 1) + "?")
-        answer = input("True or False?")
+        number_of_options = int(input("How many options are there?"))
+        options = []
+        for x in range(number_of_options):
+            option = input("What is option " + str(x + 1) + "?")
+            options.append(option)
+        answer = input("What is the answer")
+        if answer not in options:
+            print("Answer not in options, ERROR")
+
         question_dict = {
-            "question":
-                {
-                    "questionCount": counter + 1,
-                    "info": info,
-                    "Answer": answer
-                }
+
+            "question": counter + 1,
+            "info": info,
+            "options": options,
+            "Answer": answer
         }
-        questions.append(question_dict)
         counter = counter + 1
-    with open('Quiz_True_or_False_Quiz.json', 'w') as file_out:
-        json.dump(questions, file_out, indent=4, sort_keys=True)
+        question_dict_wrapper['questions'].append(question_dict)
+        questions.append(question_dict_wrapper)
+    file_output = input("What would you like to name your quiz?")
+    with open(file_output + '.json', 'w') as file_out:
+        json.dump(question_dict_wrapper, file_out, indent=4, sort_keys=True)

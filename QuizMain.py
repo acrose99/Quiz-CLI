@@ -1,48 +1,36 @@
-import SpecificAnswerQuiz
-import multipleChoiceQuestionsOneAnswer
-import trueOrFalseQuestion
-# import CombinationQuiz
-import json
+import answer
+import creator
 
-import trueOrFalseQuestionCSV
+
+# import CombinationQuiz
 
 
 def main():
     print("Would you like to create a quiz, or answer quizzes that have been made?")
     quiz_or_answer = input("Type answer or create: ")
+    default_file = 'quiz_structure.json'
     if quiz_or_answer == "answer" or quiz_or_answer == "Answer":
-        print("Which quiz do you want to answer/look at")
-        quiz_type = input("Type T/F, Multiple Choice, or Specific Answers, or all:")
-        if quiz_type == 'T/F' or quiz_type == 't/f':
-            csv_or_json = input("JSON or CSV")
-            if csv_or_json == "JSON":
-                trueOrFalseQuestion.answer('quiz_structure.json')
-            else:
-                trueOrFalseQuestionCSV.answer('quiz_structure.json')
-        elif quiz_type == 'Multiple Choice' or quiz_type == 'multiple choice':
-            multipleChoiceQuestionsOneAnswer.answer('quiz_structure.json')
-        elif quiz_type == 'Specific Answers' or quiz_type == 'specific answers':
-            SpecificAnswerQuiz.answer('quiz_structure.json')
-        elif quiz_type == 'all' or quiz_type == 'ALL':
-            SpecificAnswerQuiz.answer('quiz_structure.json')
-            trueOrFalseQuestion.answer('quiz_structure.json')
-            multipleChoiceQuestionsOneAnswer.answer('quiz_structure.json')
-            # WIP, change over to using CombinationQuiz.py
+        filename = input(
+            "Which quiz do you want to answer?\nType the full filename\nType DEFAULT for the hardcoded example")
+        if filename == "default" or filename == "DEFAULT":
+            answer.main(default_file)
+        else:
+            try:
+                answer.main(filename)
+            except AttributeError:
+                print("No file given, try again!")
     elif quiz_or_answer == "create" or quiz_or_answer == "Create":
         print(
             "Which quiz type do you want to create?\n You can create a Multiple Choice quiz, a T/F quiz, a Specific Answers quiz, or a combination.")
-        quiz_format = input("Type specific, multiple choice, T/F, or combination")
-        if quiz_format == "specific" or quiz_format == "Specific":
-            SpecificAnswerQuiz.create()
-        elif quiz_format == "multiple choice" or quiz_format == "Multiple choice" or quiz_format == "Multiple Choice":
-            multipleChoiceQuestionsOneAnswer.create()
+        quiz_format = input("Type Specific Answers, Multiple Choice, T/F, or combination: ")
+        if quiz_format == "multiple choice" or quiz_format == "Multiple choice" or quiz_format == "Multiple Choice":
+            creator.main('Multiple Choice')
+        elif quiz_format == "Specific Answers" or quiz_format == "specific answers":
+            creator.main('Specific Answer')
         elif quiz_format == "T/F" or quiz_format == "True/False" or quiz_format == "t/f":
-            trueOrFalseQuestion.create()
+            creator.main('T/F')
         elif quiz_format == "combination" or quiz_format == "Combination":
-            # CombinationQuiz.answer()
-            print("Feature currently not implemented yet. Stay tuned for future updates.")
+            creator.main('Combination')
     else:
         print("Error")
-
-
 main()
