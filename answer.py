@@ -44,41 +44,6 @@ def main(filename):
             }
             answer_output.append(user_answer_dict)
             tot_answer_count = tot_answer_count + 1
-        print("Your score on Multiple Choice questions: {}/{}".format(correct_count, questioncount))
-        with open('Quiz_Multiple_Choice_Questions_Quiz_User_Answers.json', 'w') as file_out:
+        print("Your score : {}/{}".format(correct_count, questioncount))
+        with open('answers_' + filename, 'w') as file_out:
             json.dump(answer_output, file_out, indent=4, sort_keys=True)
-
-
-def create():
-    question_dict_wrapper = {
-        'questions': [
-
-        ]
-    }
-    question_count = int(input("How many questions do you want to create?"))
-    questions = []
-    counter = 0
-    while counter < question_count:
-        info = input("What is question " + str(counter + 1) + "?")
-        number_of_options = int(input("How many options are there?"))
-        options = []
-        for x in range(number_of_options):
-            option = input("What is option " + str(x + 1) + "?")
-            options.append(option)
-        answer = input("What is the answer")
-        if answer not in options:
-            print("Answer not in options, ERROR")
-
-        question_dict = {
-
-            "question": counter + 1,
-            "info": info,
-            "options": options,
-            "Answer": answer
-        }
-        counter = counter + 1
-        question_dict_wrapper['questions'].append(question_dict)
-        questions.append(question_dict_wrapper)
-    file_output = input("What would you like to name your quiz?")
-    with open(file_output + '.json', 'w') as file_out:
-        json.dump(question_dict_wrapper, file_out, indent=4, sort_keys=True)

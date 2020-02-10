@@ -11,7 +11,7 @@ def main():
     default_file = 'quiz_structure.json'
     if quiz_or_answer == "answer" or quiz_or_answer == "Answer":
         filename = input(
-            "Which quiz do you want to answer?\nType the full filename\nType DEFAULT for the hardcoded example")
+            "Which quiz do you want to answer?\nType the full filename\nType DEFAULT for the hardcoded example ")
         if filename == "default" or filename == "DEFAULT":
             answer.main(default_file)
         else:
