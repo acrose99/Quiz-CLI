@@ -20,4 +20,4 @@
 - We made all this code ourselves
 - This uses vanilla code, so requirements.txt is blank  
 - Git tag is 1.0
-
+- Docker container: https://hub.docker.com/settings/linked-accounts
