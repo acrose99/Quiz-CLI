@@ -18,17 +18,17 @@ def main():
     }
     question_count = int(input("How many questions do you want to create?"))
     multiplechoice_count = 0
-    button = {
-        "0": None,
-        "1": None,
-        "2": None,
-        "3": None
-    }
     counter = 0
     while counter < question_count:
         question_type = input("What type of question is question " + str(
             counter + 1) + '\n Type Multiple Choice, Specific Answer, or T/F.')
         if question_type.upper() == "MULTIPLE CHOICE":
+            button = {
+                "0": None,
+                "1": None,
+                "2": None,
+                "3": None
+            }
             info = input("What is question " + str(counter + 1) + "?")
             multiplechoice_count += 1
             button_count = int(input("How many options are there?"))

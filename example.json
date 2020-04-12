@@ -29,10 +29,10 @@
         {
             "question": "Who is our TA?",
             "button": {
-                "0": "60",
-                "1": "1.127.0.0.1",
-                "2": "21",
-                "3": "100"
+                "0": "Asbel",
+                "1": "Jennifer",
+                "2": "Anne",
+                "3": "Alex"
             },
             "input": "",
             "answer": 0,
