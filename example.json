@@ -1,0 +1,68 @@
+{
+    "filled": [
+        {
+            "question": "What do we use for version control in this class?",
+            "input": "",
+            "answer": "git",
+            "correct": null
+        },
+        {
+            "question": "What planet are we on?",
+            "input": "",
+            "answer": "earth",
+            "correct": null
+        },
+        {
+            "question": "What color is the sky?",
+            "input": "",
+            "answer": "blue",
+            "correct": null
+        },
+        {
+            "question": "How many bits in a byte?",
+            "input": "",
+            "answer": "eight",
+            "correct": null
+        }
+    ],
+    "multChoice": [
+        {
+            "question": "Who is our TA?",
+            "button": {
+                "0": "60",
+                "1": "1.127.0.0.1",
+                "2": "21",
+                "3": "100"
+            },
+            "input": "",
+            "answer": 0,
+            "correct": null
+        },
+        {
+            "question": "What is the IP address for localhost?",
+            "button": {
+                "0": "60",
+                "1": "1.127.0.0.1",
+                "2": "21",
+                "3": "100"
+            },
+            "input": "",
+            "answer": 1,
+            "correct": null
+        }
+    ],
+    "T/F": [
+        [
+            {
+                "question": "The capital of Illinois is Chicago",
+                "options": {
+                    "0": true,
+                    "1": false
+                },
+                "input": "",
+                "answer": false,
+                "correct": null
+            }
+        ]
+    ]
+}

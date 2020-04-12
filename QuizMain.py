@@ -20,17 +20,7 @@ def main():
             except AttributeError:
                 print("No file given, try again!")
     elif quiz_or_answer == "create" or quiz_or_answer == "Create":
-        print(
-            "Which quiz type do you want to create?\n You can create a Multiple Choice quiz, a T/F quiz, a Specific Answers quiz, or a combination.")
-        quiz_format = input("Type Specific Answers, Multiple Choice, T/F, or combination: ")
-        if quiz_format == "multiple choice" or quiz_format == "Multiple choice" or quiz_format == "Multiple Choice":
-            creator.main('Multiple Choice')
-        elif quiz_format == "Specific Answers" or quiz_format == "specific answers":
-            creator.main('Specific Answer')
-        elif quiz_format == "T/F" or quiz_format == "True/False" or quiz_format == "t/f":
-            creator.main('T/F')
-        elif quiz_format == "combination" or quiz_format == "Combination":
-            creator.main('Combination')
+            creator.main()
     else:
         print("Error")
 main()
