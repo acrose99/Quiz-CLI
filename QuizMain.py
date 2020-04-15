@@ -8,7 +8,7 @@ import creator
 def main():
     print("Would you like to create a quiz, or answer quizzes that have been made?")
     quiz_or_answer = input("Type answer or create: ")
-    default_file = 'quiz_structure.json'
+    default_file = 'example.json'
     if quiz_or_answer == "answer" or quiz_or_answer == "Answer":
         filename = input(
             "Which quiz do you want to answer?\nType the full filename\nType DEFAULT for the hardcoded example ")

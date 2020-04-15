@@ -31,7 +31,7 @@ def main(filename):
             mult_questions.append(question['question'])
             mult_answers.append(question['answer'])
             question_count = question_count + 1
-        tf_questions_json = data['TF']
+        tf_questions_json = data['T/F']
         tf_questions = []
         tf_answers = []
         for question in tf_questions_json:

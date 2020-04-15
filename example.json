@@ -52,7 +52,6 @@
         }
     ],
     "T/F": [
-        [
             {
                 "question": "The capital of Illinois is Chicago",
                 "options": {
@@ -63,6 +62,5 @@
                 "answer": false,
                 "correct": null
             }
-        ]
     ]
 }
